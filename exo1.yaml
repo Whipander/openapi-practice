@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: Ping
+  description: Basic "Hello World" of APIs
+  version: 1.0.0
+paths:
+  /ping:
+    get:
+      description: Returns pong as plain text.
+      responses:
+        200:
+          description: Returns pong.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "pong"
+
