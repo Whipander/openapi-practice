@@ -35,6 +35,20 @@ paths:
                type: array
                items:
                  $ref: '#/components/schemas/Task'
+  /tasks/{id}:
+    get:
+      description: Retrieve a particular task.
+      parameters:
+        - $ref: '#/components/parameters/TaskId'
+      responses:
+        200:
+          description: Successfully returned the task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        404:
+          $ref: '#/components/responses/NotFound'
 
 components:
   schemas:
