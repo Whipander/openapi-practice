@@ -7,6 +7,8 @@ paths:
   /products:
     get:
       description: Return a list of products.
+      tags:
+        - Product
       parameters:
         - $ref: '#/components/parameters/LimitParams'
         - $ref: '#/components/parameters/QueryParams'
@@ -55,6 +57,29 @@ components:
         - name
         - expiration_datetime
         - price
+
+    Order:
+      type: object
+      properties:
+        identifier:
+          type: integer
+          example: 1
+        customer_name:
+          type: string
+          example: Harena Mihaja
+        creation_datetime:
+          type: string
+          format: date-time
+          example: 2025-08-31T17:15:00Z
+        total_amount:
+          type: integer
+          format: float
+          example: 199.99
+      required:
+        - identifier
+        - creation_datetime
+        - customer_name
+        - total_amount
 
   parameters:
     LimitParams:
