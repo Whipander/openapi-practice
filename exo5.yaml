@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Products and Orders management API
+  description: Products and Orders management API
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      description: Return a list of products.
+      parameters:
+        - $ref: '#/components/parameters/LimitParams'
+        - $ref: '#/components/parameters/QueryParams'
+      responses:
+        200:
+          description: Successfully returned a list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+              examples:
+                multipleProducts:
+                  value:
+                    - name: White cap
+                      expiration_datetime: null
+                      price: 5.99
+                    - name: Ketchup
+                      expiration_datetime: 2026-08-31T19:00:00Z
+                      price: 2.99
+                noProduct:
+                  value: []
+
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the product
+          example: CurlsPro
+        expiration_datetime:
+          type: string
+          description: Expiration date of the product
+          format: date-time
+          example: 2025-08-31T16:37:54Z
+        price:
+          type: integer
+          description: Price of the product
+          format: float
+          example: 19.99
+      required:
+        - name
+        - expiration_datetime
+        - price
+
+  parameters:
+    LimitParams:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of elements
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 10
+        example: 5
+    QueryParams:
+      name: q
+      in: query
+      required: false
+      description: Filter products per name.
+      schema:
+        type: string
+        example: Baby oil
