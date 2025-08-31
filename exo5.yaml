@@ -63,6 +63,47 @@ paths:
                       total_amount: 2007.04
                 noOrders:
                   value: []
+    post:
+      description: To create an order
+      security:
+        - basicAuth: []
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+            examples:
+              example1:
+                value:
+                  customer_name: Mihaja
+                  total_amount: 42069.99
+              example2:
+                value:
+                  customer_name: Coconut
+                  total_amount: 213.87
+      responses:
+        201:
+          description: Successfully created an order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                example1:
+                  value:
+                    identifier: 101
+                    customer_name: Mihaja
+                    creation_datetime: 2026-02-12T05:33:21Z
+                    total_amount: 42069.99 
+                example2:
+                  value:
+                    identifier: 1001
+                    customer_name: Coconut
+                    creation_datetime: 2022-03-14T16:47:21Z
+                    total_amount: 213.87
 
 components:
   schemas:
@@ -111,6 +152,20 @@ components:
         - customer_name
         - total_amount
 
+    OrderInput:
+      type: object
+      properties:
+        customer_name:
+          type: string
+          example: "Emmanuel Macron"
+        total_amount:
+          type: number
+          format: float
+          example: 69.420
+      required:
+        - customer_name
+        - total_amount
+
   parameters:
     LimitParams:
       name: limit
@@ -152,3 +207,8 @@ components:
         maximum: 20
         default: 10
         example: 5
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic Auth to access protected endpoints
