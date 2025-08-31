@@ -49,6 +49,19 @@ paths:
                 $ref: '#/components/schemas/Task'
         404:
           $ref: '#/components/responses/NotFound'
+    delete:
+      description: Delete a particular task.
+      parameters:
+        - $ref: '#/components/parameters/TaskId'
+      responses:
+        200:
+          description: Successfully deleted the task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        404:
+          $ref: '#/components/responses/NotFound'
 
 components:
   schemas:
