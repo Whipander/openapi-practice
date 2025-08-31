@@ -16,6 +16,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
+    post:
+      description: Creates a list of new tasks provided through the body of the request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskInput'
+      responses:
+        201:
+          description: Successful response with an array of all the newly created tasks
+          content:
+           application/json:
+             schema:
+               type: array
+               items:
+                 $ref: '#/components/schemas/Task'
 
 components:
   schemas:
