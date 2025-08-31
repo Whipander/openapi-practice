@@ -6,7 +6,7 @@ info:
 paths:
   /tasks:
     get:
-      description: Get a list of all tasks.
+      description: Gets a list of all tasks.
       responses:
         200:
           description: Successful response with an array of the all the tasks
@@ -35,6 +35,32 @@ paths:
                type: array
                items:
                  $ref: '#/components/schemas/Task'
+    delete:
+      description: Deletes a list of tasks.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: integer
+                    description: The array of IDs to delete.
+            example:
+                  ids : [1]
+      responses:
+        200:
+          description: Successfully delete the list of tasks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+
   /tasks/{id}:
     get:
       description: Retrieve a particular task.
