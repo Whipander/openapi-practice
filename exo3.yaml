@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  title: Task API
+  description: A simple API for managing tasks.
+  version: 1.0.0
+paths:
+  /tasks:
+    get:
+      description: Get a list of all tasks.
+      responses:
+        200:
+          description: Successful response with an array of the all the tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+
+components:
+  schemas:
+    Task:
+      type: object
+      required:
+        - id
+        - title
+        - completed
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Faire les courses
+        completed:
+          type: boolean
+          example: false
+    TaskInput:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the task.
+        completed:
+          type: boolean
+          description: The status of the task.
+          default: false
+      required:
+        - title
+      example:
+        title: Faire les courses
+        completed: false
+
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Task not found
+  parameters:
+    TaskId:
+      name: id
+      in: path
+      description: The id of the task
+      required: true
+      schema:
+        type: integer
