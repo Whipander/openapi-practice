@@ -1,0 +1,28 @@
+openapi: 3.1.0
+info:
+  title: Product API
+  description: Product API
+  version: 1.0.0
+paths:
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the product
+          example: CurlsPro
+        expiration_datetime:
+          type: string
+          description: Expiration date of the product
+          format: date-time
+          example: 2025-08-31T16:37:54Z
+        price:
+          type: integer
+          description: Price of the product
+          format: float
+          example: 19.99
+
+
