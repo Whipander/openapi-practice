@@ -4,6 +4,38 @@ info:
   description: User Management API
   version: 1.0.0
 paths:
+  /users/{id}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      description: Get a user by his ID.
+      tags:
+        - User
+      responses:
+        200:
+          description: Successfully found the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              examples:
+                userExample:
+                  value:
+                    identifier: "user-12345"
+                    personal_info:
+                      first_name: "Jean"
+                      last_name: "Dupont"
+                      birthdate: "1990-05-15"
+                      email: "jean.dupont@email.com"
+                    address:
+                      street: "123 Rue de la Paix"
+                      city: "Paris"
+                      country: "France"
+                      postal_code: "75001"
+                    preferences:
+                      needs_newsletter: true
+                      language: "fr"
+
 
 components:
   schemas:
@@ -34,12 +66,16 @@ components:
       properties:
         address_street:
           type: string
+          example: Rue Pasteur Rabary
         address_city:
           type: string
+          example: Antananarivo
         address_country:
           type: string
+          example: MG
         address_postal_code:
           type: integer
+          example: 101
       required:
         - address_country
         - address_postal_code
@@ -88,3 +124,12 @@ components:
               - identifier
 
           - $ref: "#/components/schemas/CreateUserProfile"
+  parameters:
+    UserId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "user-0123"
+
