@@ -132,6 +132,28 @@ paths:
                 $ref: '#/components/schemas/Address'
         400:
           $ref: '#/components/responses/BadRequest'
+  /users/{id}/preferences:
+    put:
+      tags:
+        - Modify info
+      description: Update the preferences infos.
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Preferences'
+      responses:
+        200:
+          description: Successfully updated the preferences infos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Preferences'
+        400:
+          $ref: '#/components/responses/BadRequest'
 
 components:
   schemas:
