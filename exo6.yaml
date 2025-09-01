@@ -92,7 +92,7 @@ paths:
     put:
       tags:
         - Modify info
-      description: Allow to modify personal infos
+      description: Update personal infos
       parameters:
         - $ref: '#/components/parameters/UserId'
       requestBody:
@@ -103,13 +103,35 @@ paths:
               $ref: "#/components/schemas/PersonalInfo"
       responses:
         200:
-          description: Successfully modified the personal infos.
+          description: Successfully modified the personal infos
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PersonalInfo'
         400:
           $ref: "#/components/responses/BadRequest"
+  /users/{id}/address:
+    put:
+      tags:
+        - Modify info
+      description: Update the address infos.
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        200:
+          description: Successfully updated the address infos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        400:
+          $ref: '#/components/responses/BadRequest'
 
 components:
   schemas:
