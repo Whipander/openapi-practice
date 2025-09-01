@@ -32,17 +32,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    example: 1
-                  name:
-                    type: string
-                    example: Alice
-                  email:
-                    type: string
-                    example: alice@example.com
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: Alice
+                    email:
+                      type: string
+                      example: alice@example.com
         400:
           description: In the case incorrect query params are provided.
           content:
