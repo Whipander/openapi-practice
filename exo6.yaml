@@ -88,6 +88,29 @@ paths:
                       preferences:
                         needs_newsletter: false
                         language: "fr"
+  /users/{id}/personalInfo:
+    put:
+      tags:
+        - Modify info
+      description: Allow to modify personal infos
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonalInfo"
+      responses:
+        200:
+          description: Successfully modified the personal infos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalInfo'
+        400:
+          $ref: "#/components/responses/BadRequest"
+
 components:
   schemas:
     PersonalInfo:
@@ -184,3 +207,14 @@ components:
         type: string
         example: "user-0123"
 
+  responses:
+    BadRequest:
+      description: If the fields are not correctly filled.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Bad request. Please fill correctly all the fields.
