@@ -35,6 +35,7 @@ paths:
                     preferences:
                       needs_newsletter: true
                       language: "fr"
+
   /users:
     post:
       description: Creates new users
@@ -51,17 +52,14 @@ paths:
             examples:
               createUsersExample:
                 value:
-                  - personal_info:
-                      first_name: "Marie"
+                    - first_name: "Marie"
                       last_name: "Martin"
                       birthdate: "1985-08-22"
                       email: "marie.martin@email.com"
-                    address:
                       address_street: "456 Avenue des Champs"
                       address_city: "Lyon"
                       address_country: "France"
                       address_postal_code: "69002"
-                    preferences:
                       needs_newsletter: false
                       language: "fr"
       responses:
@@ -75,19 +73,17 @@ paths:
                 example1:
                   value:
                     - identifier: user-1820
-                      personal_info:
-                        first_name: "Marie"
-                        last_name: "Martin"
-                        birthdate: "1985-08-22"
-                        email: "marie.martin@email.com"
-                      address:
-                        address_street: "456 Avenue des Champs"
-                        address_city: "Lyon"
-                        address_country: "France"
-                        address_postal_code: "69002"
-                      preferences:
-                        needs_newsletter: false
-                        language: "fr"
+                      first_name: "Marie"
+                      last_name: "Martin"
+                      birthdate: "1985-08-22"
+                      email: "marie.martin@email.com"
+                      address_street: "456 Avenue des Champs"
+                      address_city: "Lyon"
+                      address_country: "France"
+                      address_postal_code: "69002"
+                      needs_newsletter: false
+                      language: "fr"
+
   /users/{id}/personalInfo:
     put:
       tags:
@@ -110,6 +106,7 @@ paths:
                 $ref: '#/components/schemas/PersonalInfo'
         400:
           $ref: "#/components/responses/BadRequest"
+
   /users/{id}/address:
     put:
       tags:
@@ -132,6 +129,7 @@ paths:
                 $ref: '#/components/schemas/Address'
         400:
           $ref: '#/components/responses/BadRequest'
+
   /users/{id}/preferences:
     put:
       tags:
@@ -218,18 +216,10 @@ components:
           example: fr
 
     CreateUserProfile:
-      type: object
-      properties:
-        personal_info:
-          $ref: '#/components/schemas/PersonalInfo'
-        address:
-          $ref: '#/components/schemas/Address'
-        preferences:
-          $ref: '#/components/schemas/Preferences'
-      required:
-        - personal_info
-        - address
-        - preferences
+     allOf:
+       - $ref: '#/components/schemas/PersonalInfo'
+       - $ref: '#/components/schemas/Address'
+       - $ref: '#/components/schemas/Preferences'
 
     UserProfile:
         allOf:
@@ -240,8 +230,8 @@ components:
                 example: user-0123
             required:
               - identifier
-
           - $ref: "#/components/schemas/CreateUserProfile"
+
   parameters:
     UserId:
       name: id
